@@ -10,14 +10,13 @@
 
 - [Dependencies](#dependencies)
 - [Install](#install)
-- [Why?](#why)
+- [Issues](#issues)
 - [Contributing](#contributing)
 - [License](#license)
 
 # Dependencies
 
 - `bash`, `curl`, `tar`: generic POSIX utilities.
-- `SOME_ENV_VAR`: set this environment variable in your shell config to load the correct version of tool x.
 
 # Install
 
@@ -47,6 +46,10 @@ age --help
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
 install & manage versions.
+
+# Issues
+
+Issues related to age should be reported at its [Github repository](https://github.com/FiloSottile/age/issues). Issues related with the installation of age using asdf should be reported [here](https://github.com/threkk/asdf-age/issues).
 
 # Contributing
 
