@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+current_script_path=${BASH_SOURCE[0]}
+plugin_dir=$(dirname "$(dirname "$current_script_path")")
+
+# shellcheck source=../lib/utils.bash
+source "${plugin_dir}/lib/utils.bash"
+
+# TODO: Remove this once age has a release version that does not conflict with age
+# https://github.com/asdf-vm/asdf/issues/763
+list_all_versions | sort_versions | tail -n1 | xargs echo
