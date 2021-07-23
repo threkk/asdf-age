@@ -10,4 +10,4 @@ source "${plugin_dir}/lib/utils.bash"
 
 # TODO: Remove this once age has a release version that does not conflict with age
 # https://github.com/asdf-vm/asdf/issues/763
-list_all_versions | sort_versions | tail -n1 | xargs echo
+latest_version "$@"

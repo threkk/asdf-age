@@ -34,6 +34,13 @@ list_all_versions() {
   list_github_tags
 }
 
+latest_version() {
+  local query
+  query="$1"
+  [ -z "$query" ] && query="[0-9]"
+  list_all_versions | sort_versions | grep "$query" | tail -n 1
+}
+
 download_release() {
   local version filename url
   version="$1"
