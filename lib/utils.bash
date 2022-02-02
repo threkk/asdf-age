@@ -42,17 +42,36 @@ latest_version() {
 }
 
 download_release() {
-  local version filename url
+  local version filename url os arch
   version="$1"
   filename="$2"
+  os=$(uname -s | tr '[:upper:]' '[:lower:]')
+  arch=$(uname -m | tr '[:upper:]' '[:lower:]')
 
-  case $(uname | tr '[:upper:]' '[:lower:]') in
+  case "${os}" in
     linux*)
-      local platform="linux-amd64.tar.gz"
-      ;;
+      case "${arch}" in
+        aarch64)
+          local platform="linux-arm64.tar.gz"
+        ;;
+        armv*)
+          local platform="linux-arm.tar.gz"
+        ;;
+        *)
+          local platform="linux-amd64.tar.gz"
+        ;;
+      esac
+    ;;
     darwin*)
-      local platform="darwin-amd64.tar.gz"
-      ;;
+      case "${arch}" in
+        arm64)
+          local platform="darwin-arm64.tar.gz"
+        ;;
+        *)
+          local platform="darwin-amd64.tar.gz"
+        ;;
+      esac
+    ;;
     *)
       fail "Platform download not supported. Please, open an issue at $REPORT_URL"
       ;;
