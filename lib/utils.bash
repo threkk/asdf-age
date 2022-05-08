@@ -14,14 +14,13 @@ fail() {
 
 curl_opts=(-fsSL)
 
-# NOTE: You might want to remove this if age is not hosted on GitHub releases.
 if [ -n "${GITHUB_API_TOKEN:-}" ]; then
   curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
 fi
 
 sort_versions() {
-  sed 'h; s/[+-]/./g; s/.p\([[:digit:]]\)/.z\1/; s/$/.z/; G; s/\n/ /' |
-    LC_ALL=C sort -t. -k 1,1 -k 2,2n -k 3,3n -k 4,4n -k 5,5n | awk '{print $2}'
+    awk 'BEGIN{ FS="-" } { if ($0 ~ /beta/) {print $1" 1 "$0} else if ($0 ~ /rc/) { print $1" 2 "$0 } else { print $1" 3 "$0 } }' |
+    LC_ALL=C sort --reverse | awk '{print $3}'
 }
 
 list_github_tags() {
@@ -38,7 +37,7 @@ latest_version() {
   local query
   query="$1"
   [ -z "$query" ] && query="[0-9]"
-  list_all_versions | sort_versions | grep "$query" | tail -n 1
+  list_all_versions | sort_versions | grep "$query" | head -n 1
 }
 
 download_release() {
