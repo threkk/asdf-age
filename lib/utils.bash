@@ -19,7 +19,7 @@ if [ -n "${GITHUB_API_TOKEN:-}" ]; then
 fi
 
 sort_versions() {
-    awk 'BEGIN{ FS="-" } { if ($0 ~ /beta/) {print $1" 1 "$0} else if ($0 ~ /rc/) { print $1" 2 "$0 } else { print $1" 3 "$0 } }' |
+  awk 'BEGIN{ FS="-" } { if ($0 ~ /beta/) {print $1" 1 "$0} else if ($0 ~ /rc/) { print $1" 2 "$0 } else { print $1" 3 "$0 } }' |
     LC_ALL=C sort --reverse | awk '{print $3}'
 }
 
