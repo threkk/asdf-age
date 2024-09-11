@@ -35,8 +35,11 @@ list_all_versions() {
 
 latest_version() {
   local query
-  query="$1"
-  [ -z "$query" ] && query="[0-9]"
+  if [ "${#}" = 0 ]; then
+    query="[0-9"]
+  else
+    query="${1}"
+  fi
   list_all_versions | sort_versions | grep "$query" | head -n 1
 }
 
