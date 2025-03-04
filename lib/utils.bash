@@ -55,25 +55,25 @@ download_release() {
       case "${arch}" in
         aarch64)
           local platform="linux-arm64.tar.gz"
-        ;;
+          ;;
         armv*)
           local platform="linux-arm.tar.gz"
-        ;;
+          ;;
         *)
           local platform="linux-amd64.tar.gz"
-        ;;
+          ;;
       esac
-    ;;
+      ;;
     darwin*)
       case "${arch}" in
         arm64)
           local platform="darwin-arm64.tar.gz"
-        ;;
+          ;;
         *)
           local platform="darwin-amd64.tar.gz"
-        ;;
+          ;;
       esac
-    ;;
+      ;;
     *)
       fail "Platform download not supported. Please, open an issue at $REPORT_URL"
       ;;
